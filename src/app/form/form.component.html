@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" formControlName="password" class="form-control">
+        <div *ngIf="(form.dirty || form.touched)" class="p-2">
+            <div *ngIf="form.get('password')?.hasError('required')" class="text-danger">
+                <i class="bi bi-exclamation-circle"></i> Le mot de passe est requis.
+            </div>
+
+            <div *ngIf="form.get('password')?.hasError('minlength')" class="text-danger">
+                <i class="bi bi-exclamation-circle"></i> Le mot de passe doit contenir au moins 8 caractères.
+            </div>
+            <div *ngIf="!form.get('password')?.hasError('minlength')" class="text-success">
+                <i class="bi bi-check-all"></i> Le mot de passe doit contenir au moins 8 caractères.
+            </div>
+
+            <div *ngIf="form.get('password')?.hasError('specialCharacter')" class="text-danger">
+                <i class="bi bi-exclamation-circle"></i> Le mot de passe doit contenir un caractère spécial.
+            </div>
+            <div *ngIf="!form.get('password')?.hasError('specialCharacter')" class="text-success">
+                <i class="bi bi-check-all"></i> Le mot de passe doit contenir un caractère spécial.
+            </div>
+
+            <div *ngIf="form.get('password')?.hasError('uppercase')" class="text-danger">
+                <i class="bi bi-exclamation-circle"></i> Le mot de passe doit contenir au moins une lettre majuscule.
+            </div>
+            <div *ngIf="!form.get('password')?.hasError('uppercase')" class="text-success">
+                <i class="bi bi-check-all"></i> Le mot de passe doit contenir au moins une lettre majuscule.
+            </div>
+
+            <div *ngIf="form.get('password')?.hasError('digit')" class="text-danger">
+                <i class="bi bi-exclamation-circle"></i> Le mot de passe doit contenir au moins un chiffre.
+            </div>
+            <div *ngIf="!form.get('password')?.hasError('digit')" class="text-success">
+                <i class="bi bi-check-all"></i> Le mot de passe doit contenir au moins un chiffre.
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Soumettre</button>
+</form>
